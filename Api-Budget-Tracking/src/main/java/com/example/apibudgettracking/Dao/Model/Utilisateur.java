@@ -14,4 +14,6 @@ public class Utilisateur {
     private String nom;
     private String email;
     private String motDePasse;
+    @Lob
+    private byte[] profilePicture;
 }
