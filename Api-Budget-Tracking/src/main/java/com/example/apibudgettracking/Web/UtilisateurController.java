@@ -14,15 +14,21 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class UtilisateurController {
 @Autowired
     UtilisateurService utilisateurService;
     @PostMapping("/add")
-    public String add(@RequestBody Utilisateur user) {
-        utilisateurService.saveUser(user);
-        return "new user is added";
+    public ResponseEntity<String> add(@RequestBody Utilisateur user,@RequestParam("file") MultipartFile file) {
+        try {
+            utilisateurService.saveUser(user);
+            utilisateurService.saveProfilePicture(user.getId(), file);
+            return ResponseEntity.ok("File and user uploaded successfully!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
+        }
     }
+
     @GetMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password) {
 

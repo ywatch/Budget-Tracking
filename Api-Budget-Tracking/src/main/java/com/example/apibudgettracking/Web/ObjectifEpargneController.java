@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/ObjectifEpargne")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class ObjectifEpargneController {
     @Autowired
     ObjectifEpargneService ObjectifEpargneService;
